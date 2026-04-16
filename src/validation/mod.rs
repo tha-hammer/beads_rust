@@ -229,8 +229,8 @@ impl LabelValidator {
             return Err(ValidationError::new("label", "cannot be empty"));
         }
 
-        if label.len() > 50 {
-            return Err(ValidationError::new("label", "exceeds 50 characters"));
+        if label.len() > 128 {
+            return Err(ValidationError::new("label", "exceeds 128 characters"));
         }
 
         if !label

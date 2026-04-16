@@ -1147,8 +1147,8 @@ fn e2e_structured_error_label_too_long() {
     assert!(create.status.success());
     let id = parse_created_id(&create.stdout);
 
-    // Create a label that exceeds 50 characters
-    let long_label = "a".repeat(60);
+    // Create a label that exceeds 128 characters
+    let long_label = "a".repeat(200);
     let result = run_br(
         &workspace,
         ["update", &id, "--add-label", &long_label, "--json"],

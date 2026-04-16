@@ -860,7 +860,7 @@ mod tests {
         assert!(validate_label("has space").is_err());
         assert!(validate_label("special@char").is_err());
         assert!(validate_label("dot.not.allowed").is_err());
-        assert!(validate_label(&"a".repeat(51)).is_err());
+        assert!(validate_label(&"a".repeat(129)).is_err());
     }
 
     #[test]

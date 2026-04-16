@@ -235,7 +235,7 @@ proptest! {
 
     /// Property: Valid label format passes validation
     #[test]
-    fn valid_label_passes(label in "[a-zA-Z0-9_:-]{1,50}") {
+    fn valid_label_passes(label in "[a-zA-Z0-9_:-]{1,128}") {
         init_test_logging();
         info!("proptest_valid_label: label={label}");
 
@@ -271,7 +271,7 @@ proptest! {
 
     /// Property: Label over 50 chars fails validation
     #[test]
-    fn long_label_fails(len in 51usize..100usize) {
+    fn long_label_fails(len in 129usize..200usize) {
         init_test_logging();
         let label = "x".repeat(len);
         info!("proptest_long_label: len={len}");
