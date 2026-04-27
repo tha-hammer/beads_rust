@@ -542,6 +542,16 @@ impl SqliteStorage {
         Ok(())
     }
 
+    /// Check whether a named index exists in sqlite_master.
+    /// Used by schema integration tests to assert structural correctness.
+    pub fn index_exists(&self, name: &str) -> bool {
+        let sql = "SELECT 1 FROM sqlite_master WHERE type='index' AND name=?";
+        self.conn
+            .query_with_params(sql, &[SqliteValue::from(name)])
+            .map(|rows| !rows.is_empty())
+            .unwrap_or(false)
+    }
+
     /// Execute a raw SQL query and return all result rows.
     ///
     /// # Errors
@@ -7388,6 +7398,7 @@ impl SqliteStorage {
         crate::storage::schema::execute_batch(&self.conn, sql)?;
         Ok(())
     }
+
 }
 
 #[cfg(test)]

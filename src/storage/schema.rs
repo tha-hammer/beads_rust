@@ -126,6 +126,7 @@ pub const SCHEMA_SQL: &str = r"
     );
     CREATE INDEX IF NOT EXISTS idx_labels_label ON labels(label);
     CREATE INDEX IF NOT EXISTS idx_labels_issue ON labels(issue_id);
+    CREATE INDEX IF NOT EXISTS idx_labels_for_label_lookup ON labels(label, issue_id);
 
     -- Comments
     CREATE TABLE IF NOT EXISTS comments (

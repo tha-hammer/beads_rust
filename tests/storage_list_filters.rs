@@ -937,3 +937,17 @@ fn filter_with_special_characters_in_title() {
     // Should match because title contains literal %
     assert_eq!(results.len(), 1);
 }
+
+// ============================================================================
+// INDEX SCHEMA TESTS — bd m07 Fix 3
+// ============================================================================
+
+#[test]
+fn labels_table_has_covering_index_for_label_lookup() {
+    let storage = test_db();
+    assert!(
+        storage.index_exists("idx_labels_for_label_lookup"),
+        "Expected composite index (label, issue_id) on labels table — got none. \
+         Add: CREATE INDEX IF NOT EXISTS idx_labels_for_label_lookup ON labels(label, issue_id)"
+    );
+}
